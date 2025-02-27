@@ -17,6 +17,7 @@ class Py2Js:
         python_lines = self.python_code.split("\n")
         
         for line in python_lines:
+            line = line.replace("math.pi", "3.14159")
             stripped_line = str(line.strip())
             indent_level = len(line) - len(stripped_line)
 
@@ -30,9 +31,6 @@ class Py2Js:
 
             elif "print(" in stripped_line:
                 stripped_line = re.sub(r"\bprint\s*\(", "console.log(", stripped_line)
-
-            elif "math.pi" in stripped_line:
-                stripped_line = stripped_line.replace("math.pi", "3.14159")
 
             elif re.match(r"^\w+\s*=\s*.*", stripped_line):
                 stripped_line = "let " + stripped_line
